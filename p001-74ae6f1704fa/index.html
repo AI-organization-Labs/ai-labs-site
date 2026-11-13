@@ -14,8 +14,8 @@ footer{margin-top:3em;font-size:.8em;color:#888}
 </style></head><body>
 <h1>商务日语邮件模板集（中日对照）</h1>
 <p class="tip"><b>怎么用：</b>点下面这<b>一个</b>按钮，手机的邮件 App 会打开，全部 20 个模板已经填进正文。<b>收件人填你自己的工作邮箱</b>，发出去，就能在工作电脑上保存、修改使用。想只拿某一个模板，点它旁边的「📋 复制」。以前写一封邮件 30 分钟，现在 3 分钟，剩下的……懂的都懂😏</p>
-<p><button id="sendAll" class="btn mail big">📧 一键发到我的邮箱（全部 20 个模板）</button></p>
-<p id="sendMsg" class="notes"></p>
+<p><button class="btn mail big sendAll">📧 一键发到我的邮箱（全部 20 个模板）</button></p>
+<p class="notes sendMsg"></p>
 <p>本页面仅供购买者使用，请勿转发链接。</p>
 <h2>第 2 章 社内邮件</h2><section class="card" id="s2-01">
 <h3>2-01 请假（年休申请）</h3>
@@ -674,11 +674,13 @@ URL：（後ほどお送りいたします）
 
 （署名）</pre>
 <ul class="notes"><li>提示：许多公司希望先打电话再补邮件。辞退理由一般不必详细说明。</li></ul></section>
+<p><button class="btn mail big sendAll">📧 一键发到我的邮箱（全部 20 个模板）</button></p>
+<p class="notes sendMsg"></p>
 <footer>※模板仅供参考，请根据公司惯例调整用语。<br>本站为借助 AI（Anthropic 的 Claude）运营的个人实验，与 Anthropic 公司无关。</footer>
 <script>
 document.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.dataset.t).then(()=>{b.textContent='✅ 已复制';setTimeout(()=>b.textContent='📋 复制',1500)})});
 
-document.getElementById('sendAll').onclick=function(){
+document.querySelectorAll('.sendAll').forEach(function(btn){btn.onclick=function(){
   var out=[document.querySelector('h1').textContent,''];
   document.querySelectorAll('h2, section.card').forEach(function(el){
     if(el.tagName==='H2'){out.push('','==== '+el.textContent+' ====','');return;}
@@ -688,8 +690,7 @@ document.getElementById('sendAll').onclick=function(){
   });
   out.push(document.querySelector('footer').innerText);
   var all=out.join('\n');
-  var m=document.getElementById('sendMsg');
-  if(navigator.clipboard){navigator.clipboard.writeText(all).then(function(){m.textContent='已同时复制到剪贴板；如果邮件正文不完整，直接粘贴即可。';}).catch(function(){});}
+  if(navigator.clipboard){navigator.clipboard.writeText(all).then(function(){document.querySelectorAll('.sendMsg').forEach(function(m){m.textContent='已同时复制到剪贴板；如果邮件正文不完整，直接粘贴即可。';});}).catch(function(){});}
   location.href='mailto:?subject='+encodeURIComponent('商务日语邮件模板集（20个场景，含说明）')+'&body='+encodeURIComponent(all);
-};
+};});
 </script></body></html>
